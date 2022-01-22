@@ -24,11 +24,13 @@ struct QuizBrain {
         Question(q: "Chocolate affects a dog's heart and nervous system; a few ounces are enough to kill a small dog.", a: "True")
     ]
     
+    var score = 0
     var questionNumber = 0
     
-    func checkAnswer (_ userAnswer: String)  -> Bool {
+    mutating func checkAnswer (_ userAnswer: String)  -> Bool {
         if userAnswer == questionArray[questionNumber].answer{
             //User got it right
+            score += 1
             return true
         }else{
             return false
@@ -44,14 +46,19 @@ struct QuizBrain {
         return progress
     }
     
-    func nextQuestion(){
+    mutating func nextQuestion(){
         if questionNumber + 1 < questionArray.count {
             questionNumber += 1
             
         }else{
             questionNumber = 0
+            score = 0
             print("End of quiz")
         }
+    }
+    
+    func getScore() -> Int{
+        return score
     }
     
 }

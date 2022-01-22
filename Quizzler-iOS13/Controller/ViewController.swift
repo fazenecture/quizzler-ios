@@ -10,6 +10,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var falseButton: UIButton!
+    @IBOutlet weak var scoreKeeper: UILabel!
     
     var quizBrain = QuizBrain()
  
@@ -43,6 +44,8 @@ class ViewController: UIViewController {
             print("koi baat nhi")
         }
         
+        quizBrain.nextQuestion()
+        
 
         Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
     }
@@ -58,11 +61,7 @@ class ViewController: UIViewController {
             print("koi baat nhi")
         }
         
-        if questionNumber + 1 < questionArray.count {
-            questionNumber += 1
-        }else{
-            print("End of quiz")
-        }
+        quizBrain.nextQuestion()
         
         Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
     }
@@ -73,6 +72,7 @@ class ViewController: UIViewController {
         questionLabel.text = quizBrain.getQuestionText()
         trueButton.backgroundColor = UIColor.clear
         falseButton.backgroundColor = UIColor.clear
+        scoreKeeper.text = "Score: \(quizBrain.getScore())"
     }
     
     
